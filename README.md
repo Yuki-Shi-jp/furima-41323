@@ -18,51 +18,51 @@
 ### Association
 
 - has_many :items
-- has_many :user_items, through: items
+- has_many :orders
 
 
 # テーブル設計
 
 ## addresses テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| postal_code        | string | null: false |
-| prefecture         | string | null: false |
-| city               | string | null: false |
-| address            | string | null: false |
-| building_name      | string | null: false |
-| phone_number       | string |             |
+| Column             | Type    | Options                         |
+| ------------------ | ------- | ------------------------------- |
+| postal_code        | string  | null: false, foreign_key: true  |
+| prefecture_id      | integer | null: false, foreign_key: true  |
+| city               | string  | null: false, foreign_key: true  |
+| address            | string  | null: false, foreign_key: true  |
+| building_name      | string  | foreign_key: true               |
+| phone_number       | string  | null: false, foreign_key: true  |
 
 ### Association
 
-- belongs_to :user_item
+- belongs_to :order
 
 
 # テーブル設計
 
 ## items テーブル
 
-| Column              | Type   | Options     |
-| ------------------- | ------ | ----------- |
-| product_name        | string | null: false |
-| product_description | text   | null: false |
-| category_id         | integer| null: false |
-| sales_status_id     | integer| null: false |
-| shipping_fee_status_id |integer| null: false |
-| prefecture_id       | integer| null: false |
-| scheduled_delivery_id | integer| null: false |
-| price               | integer| null: false |
+| Column                 | Type      | Options                        |
+| ---------------------- | --------- | ------------------------------ |
+| product_name           | string    | null: false                    |
+| product_description    | text      | null: false                    |
+| category_id            | integer   | null: false, foreign_key: true |
+| sales_status_id        | integer   | null: false, foreign_key: true |
+| shipping_fee_status_id | integer   | null: false, foreign_key: true |
+| prefecture_id          | integer   | null: false, foreign_key: true |
+| scheduled_delivery_id  | integer   | null: false, foreign_key: true |
+| price                  | integer   | null: false                    |
 
 ### Association
 
 - belongs_to :user
-- has_one :user-item
+- has_one :order
 
 
 # テーブル設計
 
-## user_items テーブル
+## orders テーブル
 
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
@@ -71,6 +71,7 @@
 
 ### Association
 
+- belongs_to :user
 - belongs_to :item
-- has_many :addresses
+- has_one :address
 
