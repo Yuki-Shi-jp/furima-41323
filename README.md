@@ -25,15 +25,15 @@
 
 ## addresses テーブル
 
-| Column             | Type    | Options                         |
-| ------------------ | ------- | ------------------------------- |
-| postal_code        | string  | null: false, foreign_key: true  |
-| prefecture_id      | integer | null: false, foreign_key: true  |
-| city               | string  | null: false, foreign_key: true  |
-| address            | string  | null: false, foreign_key: true  |
-| building_name      | string  | foreign_key: true               |
-| phone_number       | string  | null: false, foreign_key: true  |
-
+| Column             | Type       | Options      |
+| ------------------ | ---------- | ------------ |
+| postal_code        | string     | null: false  |
+| prefecture_id      | integer    | null: false  |
+| city               | string     | null: false  |
+| address            | string     | null: false  |
+| building_name      | string     |              |
+| phone_number       | string     | null: false  |
+| order              | references | null: false, foreign_key: true |
 ### Association
 
 - belongs_to :order
@@ -43,16 +43,17 @@
 
 ## items テーブル
 
-| Column                 | Type      | Options                        |
-| ---------------------- | --------- | ------------------------------ |
-| product_name           | string    | null: false                    |
-| product_description    | text      | null: false                    |
-| category_id            | integer   | null: false, foreign_key: true |
-| sales_status_id        | integer   | null: false, foreign_key: true |
-| shipping_fee_status_id | integer   | null: false, foreign_key: true |
-| prefecture_id          | integer   | null: false, foreign_key: true |
-| scheduled_delivery_id  | integer   | null: false, foreign_key: true |
-| price                  | integer   | null: false                    |
+| Column                 | Type         | Options     |
+| ---------------------- | ------------ | ----------- |
+| product_name           | string       | null: false |
+| product_description    | text         | null: false |
+| category_id            | integer      | null: false |
+| sales_status_id        | integer      | null: false |
+| shipping_fee_status_id | integer      | null: false |
+| prefecture_id          | integer      | null: false |
+| scheduled_delivery_id  | integer      | null: false |
+| price                  | integer      | null: false |
+| user                   | references   | null: false, foreign_key: true |
 
 ### Association
 
