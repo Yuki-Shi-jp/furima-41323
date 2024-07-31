@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user do
     nickname { 'TestUser' }
-    email { 'test@example.com' }
+    email { Faker::Internet.email }
     last_name { '山田' } # 全角文字
     first_name { '太郎' } # 全角文字
     kana_last_name { 'ヤマダ' } # 全角カタカナ
