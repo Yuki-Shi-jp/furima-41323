@@ -1,12 +1,13 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  validates :image, presence: true
   validates :product_name, :product_description, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
-  validates :category_id, numericality: { other_than: 1 }
-  validates :sales_status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_status_id, numericality: { other_than: 1 }
-  validates :prefecture_id, numericality: { other_than: 1 }
-  validates :scheduled_delivery_id, numericality: { other_than: 1 }
+  validates :category_id, numericality: { other_than: 1 }, presence: true
+  validates :sales_status_id, numericality: { other_than: 1 }, presence: true
+  validates :shipping_fee_status_id, numericality: { other_than: 1 }, presence: true
+  validates :prefecture_id, numericality: { other_than: 1 }, presence: true
+  validates :scheduled_delivery_id, numericality: { other_than: 1 }, presence: true
 
   belongs_to :user
   has_one_attached :image
