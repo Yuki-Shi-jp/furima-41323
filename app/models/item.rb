@@ -19,5 +19,4 @@ class Item < ApplicationRecord
   validates :shipping_fee_status_id, numericality: { other_than: 1 }, presence: true
   validates :prefecture_id, numericality: { other_than: 1 }, presence: true
   validates :scheduled_delivery_id, numericality: { other_than: 1 }, presence: true
-  validates :user, presence: true
 end

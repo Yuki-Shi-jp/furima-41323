@@ -4,7 +4,6 @@ function setUpPriceEventListener() {
   if (priceInput) {
     priceInput.addEventListener("input", () => {
       const inputValue = priceInput.value;
-      console.log(inputValue);
 
       const addTaxDom = document.getElementById("add-tax-price");
       const profitDom = document.getElementById("profit");
@@ -14,7 +13,7 @@ function setUpPriceEventListener() {
         if (!isNaN(numericValue)) {
           const fee = numericValue * 0.1;
           const roundedFee = Math.floor(fee); 
-          const profit = numericValue - roundedFee;
+          const profit = Math.floor(numericValue - roundedFee);
 
           const formattedFee = roundedFee.toLocaleString(); 
           const formattedProfit = profit.toLocaleString();
@@ -30,6 +29,5 @@ function setUpPriceEventListener() {
   }
 }
 
-// turbo:load および turbo:render イベントが発生した時に関数を実行
 document.addEventListener("turbo:load", setUpPriceEventListener);
 document.addEventListener("turbo:render", setUpPriceEventListener);

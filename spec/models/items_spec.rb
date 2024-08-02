@@ -33,33 +33,33 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーの情報が必須であること' do
-        @item.category_id = nil
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors[:category_id]).to include("can't be blank")
+        expect(@item.errors[:category_id]).to include('must be other than 1')
       end
 
       it '商品の状態の情報が必須であること' do
-        @item.sales_status_id = nil
+        @item.sales_status_id = 1
         @item.valid?
-        expect(@item.errors[:sales_status_id]).to include("can't be blank")
+        expect(@item.errors[:sales_status_id]).to include('must be other than 1')
       end
 
       it '配送料の負担の情報が必須であること' do
-        @item.shipping_fee_status_id = nil
+        @item.shipping_fee_status_id = 1
         @item.valid?
-        expect(@item.errors[:shipping_fee_status_id]).to include("can't be blank")
+        expect(@item.errors[:shipping_fee_status_id]).to include('must be other than 1')
       end
 
       it '発送元の地域の情報が必須であること' do
-        @item.prefecture_id = nil
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors[:prefecture_id]).to include("can't be blank")
+        expect(@item.errors[:prefecture_id]).to include('must be other than 1')
       end
 
       it '発送までの日数の情報が必須であること' do
-        @item.scheduled_delivery_id = nil
+        @item.scheduled_delivery_id = 1
         @item.valid?
-        expect(@item.errors[:scheduled_delivery_id]).to include("can't be blank")
+        expect(@item.errors[:scheduled_delivery_id]).to include('must be other than 1')
       end
 
       it '価格の情報が必須であること' do
@@ -68,11 +68,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors[:price]).to include("can't be blank")
       end
 
-      it '価格は、¥300~¥9,999,999の間のみ保存可能であること' do
+      it '価格は、¥300以上のみ保存可能であること' do
         @item.price = 299
         @item.valid?
         expect(@item.errors[:price]).to include('must be greater than or equal to 300')
+      end
 
+      it '価格は、¥9,999,999以下のみ保存可能であること' do
         @item.price = 10_000_000
         @item.valid?
         expect(@item.errors[:price]).to include('must be less than or equal to 9999999')
@@ -87,7 +89,7 @@ RSpec.describe Item, type: :model do
       it 'userと紐付いてなければ保存できない' do
         @item.user = nil
         expect(@item).not_to be_valid
-        expect(@item.errors[:user]).to include("can't be blank")
+        expect(@item.errors[:user]).to include('must exist')
       end
     end
   end
