@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:edit, :update]
+  before_action :set_item, only: [:show, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :correct_user, only: [:edit, :update]
   def index
@@ -12,7 +12,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
     @item.category_id = 1 if @item.category_id.nil?
 
     if @item.save
@@ -23,11 +22,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
@@ -45,9 +42,7 @@ class ItemsController < ApplicationController
   end
 
   def correct_user
-    return if current_user.id == @item.user_id
-
-    redirect_to root_path
+    redirect_to root_path unless current_user.id == @item.user_id
   end
 
   def item_params
