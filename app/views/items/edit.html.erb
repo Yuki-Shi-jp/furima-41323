@@ -78,7 +78,6 @@ app/assets/stylesheets/items/new.css %>
       </div>
     </div>
 
-    <%# 販売価格 %>
     <div class="sell-price">
       <div class="weight-bold-text question-text">
         <span>販売価格<br>(¥300〜9,999,999)</span>
@@ -107,7 +106,6 @@ app/assets/stylesheets/items/new.css %>
         </div>
       </div>
     </div>
-    <%# /販売価格 %>
 
     <%# 注意書き %>
     <div class="caution">
@@ -128,12 +126,10 @@ app/assets/stylesheets/items/new.css %>
       </p>
     </div>
     <%# /注意書き %>
-    <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "変更する" , class:"sell-btn" %>
       <%=link_to 'もどる', item_path, class:"back-btn" %>
     </div>
-    <%# /下部ボタン %>
   </div>
   <% end %>
 
