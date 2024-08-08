@@ -15,4 +15,8 @@ class User < ApplicationRecord
   validates :birthday, presence: true
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
   validates_format_of :password, with: PASSWORD_REGEX
+
+  # Associations
+  has_many :items
+  has_many :orders
 end
