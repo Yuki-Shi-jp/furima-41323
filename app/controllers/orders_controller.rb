@@ -23,6 +23,9 @@ class OrdersController < ApplicationController
 
   def set_item
     @item = Item.find(params[:item_id])
+    return unless @item.nil?
+
+    redirect_to root_path
   end
 
   def order_params
@@ -34,14 +37,14 @@ class OrdersController < ApplicationController
   def pay_item
     Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @item.price, # 商品の値段
-      card: order_params[:token], # カードトークン
-      currency: 'jpy' # 通貨の種類（日本円）
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
     )
   end
 
   def check_user_and_status
-    return unless @item.user_id == current_user.id
+    return unless @item.user_id == current_user.id || @item.sold_out?
 
     redirect_to root_path
   end
