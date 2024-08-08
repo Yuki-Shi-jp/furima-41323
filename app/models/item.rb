@@ -1,5 +1,10 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+
+  def sold_out?
+    order.present?
+  end
+
   # Associations
   belongs_to :user
   has_one :order
